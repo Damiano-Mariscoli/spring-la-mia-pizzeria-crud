@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <div th:replace="~{fragments/resources :: headTags}"></div>
+    <title>Pizzas</title>
+  </head>
+  <body>
+    <div th:replace="~{fragments/navbar :: navbar}"></div>
+    <main class="container">
+      <h1>Pizzas</h1>
+      <hr />
+      <section class="row">
+        <div class="col-12">
+          <table th:if="${pizzas.size() > 0}" class="table table-striped">
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>Descrizione</th>
+                <th>Prezzo</th>
+                <!-- <th>Foto</th> -->
+              </tr>
+            </thead>
+            <tbody>
+              <tr th:each="pizza : ${pizzas}" th:object="${pizza}">
+                <td th:text="${pizza.nome}"></td>
+                <td th:text="${pizza.descrizione}"></td>
+                <td th:text="${pizza.Prezzo} + €"></td>
+                <td>
+                  <a th:href="@{/pizzas/{id}(id=${pizza.id})}">show</a>
+                </td>
+                <!-- <td>
+                  <a th:href="${pizza.foto}"></a>
+                </td> -->
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p th:unless="${pizzas.size() > 0}">
+          Nessuna pizza presente nella nostra applicazione...
+        </p>
+      </section>
+    </main>
+    <div th:replace="~{fragments/resources :: scripts}"></div>
+  </body>
+</html>
