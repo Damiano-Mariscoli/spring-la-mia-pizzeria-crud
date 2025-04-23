@@ -30,7 +30,7 @@ public class Pizza {
     @NotBlank(message = "La foto non può essere vuota")
     private String foto;
 
-    @NotNull
+    @NotNull(message = "Il prezzo non puo essere vuoto")
     @Min(value = 0, message = "Il prezzo non puo essere un numero negativo")
     private BigDecimal prezzo;
 

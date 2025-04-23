@@ -6,9 +6,39 @@
   </head>
   <body>
     <div th:replace="~{fragments/navbar :: navbar}"></div>
+
     <main class="container">
+      <div class="row my-5">
+        <div class="col-6">
+          <div class="search-container">
+            <form
+              class="d-flex"
+              th:action="@{/pizzas/searchByNome}"
+              method="get"
+            >
+              <input
+                type="text"
+                name="nome"
+                class="form-control"
+                placeholder="Cerca pizza..."
+              />
+              <button type="submit" class="btn btn-primary">Cerca</button>
+            </form>
+          </div>
+        </div>
+
+        <div class="col-6">
+          <a class="btn btn-primary w-100" th:href="@{/pizzas/create}"
+            >Crea una pizza</a
+          >
+        </div>
+      </div>
+
+      <hr />
+
       <h1>Pizzas</h1>
       <hr />
+
       <section class="row">
         <div class="col-12">
           <table th:if="${pizzas.size() > 0}" class="table table-striped">
@@ -28,9 +58,6 @@
                 <td>
                   <a th:href="@{/pizzas/{id}(id=${pizza.id})}">show</a>
                 </td>
-                <!-- <td>
-                  <a th:href="${pizza.foto}"></a>
-                </td> -->
               </tr>
             </tbody>
           </table>
