@@ -6,15 +6,15 @@
   </head>
   <body>
     <div th:replace="~{fragments/navbar :: navbar}"></div>
-    <main class="container">
+    <main class="container" th:object="${pizza}">
       <div class="row">
         <div class="col-12">
           <th:block>
-            <h1 class="text-center py-4 mb-2">Crea una nuova pizza</h1>
+            <h1 class="text-center py-4 mb-2" >Modifica la Pizza: [[*{nome}]]</h1>
 
             <div class="row justify-content-center">
               <div class="col-8">
-                <form class="form" th:action="@{/pizzas/create}" th:object="${pizza}" method="post" id="formPizza">
+                <form class="form" th:action="@{/pizzas/edit/{id}(id = ${pizza.id})}" method="post" id="formPizza">
                   <!-- <div th:if="${#fields.hasErrors()}">
                     <ul class="alert alert-danger px-4">
                       <li th:each="error : ${#fields.allErrors()}" th:text="${error}">
@@ -62,7 +62,7 @@
                   </div>
 
                   <div class="my-3 d-flex justify-content-between">
-                   <input type="submit" class="btn btn-primary" value="Create new pizza">
+                   <input type="submit" class="btn btn-primary" value="Modifica pizza">
                    <input type="reset" class="btn btn-warning" value="Reset all fields" form="formPizza">
                   </div>
 

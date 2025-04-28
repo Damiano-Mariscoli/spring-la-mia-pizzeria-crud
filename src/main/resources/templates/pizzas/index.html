@@ -56,12 +56,79 @@
                 <td th:text="${pizza.descrizione}"></td>
                 <td th:text="${pizza.Prezzo} + €"></td>
                 <td>
-                  <a th:href="@{/pizzas/{id}(id=${pizza.id})}">show</a>
+                  <a
+                    class="btn btn-primary btn-sm"
+                    th:href="@{/pizzas/{id}(id=${pizza.id})}"
+                    >show</a
+                  >
+                </td>
+                <td>
+                  <a
+                    class="btn btn-success btn-sm"
+                    th:href="@{/pizzas/edit/{id}(id=${pizza.id})}"
+                    >edit</a
+                  >
+                </td>
+                <td>
+                  <button
+                    type="button"
+                    class="btn btn-danger btn-sm"
+                    data-bs-toggle="modal"
+                    th:data-bs-target="'#delete-modal-' + ${pizza.id}"
+                  >
+                    Delete
+                  </button>
+
+                  <div
+                    class="modal fade"
+                    th:id="'delete-modal-' + ${pizza.id}"
+                    tabindex="-1"
+                    aria-labelledby="delete-modal"
+                    aria-hidden="true"
+                  >
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h1 class="modal-title fs-5" id="exampleModalLabel">
+                            Stai eliminando la pizza: [[*{nome}]]
+                          </h1>
+                          <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                          ></button>
+                        </div>
+                        <div class="modal-body">
+                          Sei sicuro di voler eliminare la pizza: [[*{nome}]]?
+                        </div>
+                        <div class="modal-footer">
+                          <button
+                            type="button"
+                            class="btn btn-secondary"
+                            data-bs-dismiss="modal"
+                          >
+                            Chiudi
+                          </button>
+                          <form
+                            action="#"
+                            th:action="@{/pizzas/delete/{id}(id=${pizza.id})}"
+                            method="post"
+                          >
+                            <button type="submit" class="btn btn-danger">
+                              Elimina
+                            </button>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </td>
               </tr>
             </tbody>
           </table>
         </div>
+
         <p th:unless="${pizzas.size() > 0}">
           Nessuna pizza presente nella nostra applicazione...
         </p>
